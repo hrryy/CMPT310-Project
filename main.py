@@ -20,6 +20,9 @@ print(student.isnull().sum())
 # Remove career_asperation with unknown values
 student = student[student['career_aspiration'] != 'Unknown']
 
+# Remove first 4 columns (ID, first_name, last_name, email)
+student = student.iloc[:, 4:]
+print(student.head())
 
 # Basic statistics of the dataset
 print(student.describe())
@@ -45,4 +48,4 @@ student['best_subject_score'] = student[['math_score','history_score','physics_s
 student['worst_subject_score'] = student[['math_score','history_score','physics_score','chemistry_score','biology_score','english_score','geography_score']].min(axis=1)
 
 # study efficiency
-student['study_efficiency'] = student['average_score'] / student['study_hours'].replace(0, 1)
+student['study_efficiency'] = student['average_score'] / student['weekly_self_study_hours'].replace(0, 1)
